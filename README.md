@@ -24,7 +24,7 @@ Un timer enregistre le temps écoulé, tandis qu’un compteur de coups et un me
         🔢 Compteur de coups et affichage du meilleur score
         📱 Design responsive et animations CSS fluides
 
-<br><br><br>
+<br><br>
 <h2 id="en">🇬🇧 English Version</h2>
 
 This project is an interactive memory card game built with React, TypeScript, and CSS.
@@ -45,3 +45,5 @@ A timer tracks how long the player takes, while a move counter and best score en
         ⏱️ Built-in timer for each round
         🔢 Move counter and best score tracking
         📱 Fully responsive design with smooth CSS animations
+
+<img width="1745" height="1021" alt="image" src="https://github.com/user-attachments/assets/f2b36917-e87e-4a3e-bdeb-709e4e8378a7" />
