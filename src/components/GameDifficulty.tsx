@@ -1,13 +1,15 @@
+import type { Translation } from "../locales";
 import type { DifficultyLevel } from "../utils/types";
 
-export default function GameDifficulty({ levels, currentSize, onDifficultyChange }: { 
+export default function GameDifficulty({ levels, currentSize, t, onDifficultyChange }: { 
   levels: DifficultyLevel[]; 
-  currentSize: number; 
+  currentSize: number;
+  t: Translation;
   onDifficultyChange: (size: number) => void;
 }) {
   return (
     <div className="section">
-      <h3>Difficulty</h3>
+      <h3>{t.difficulty}</h3>
       <div className="difficulty-list">
         {levels.map(level => (
           <button
@@ -15,7 +17,9 @@ export default function GameDifficulty({ levels, currentSize, onDifficultyChange
             onClick={() => onDifficultyChange(level.size)}
             className={`difficulty-item ${currentSize === level.size ? 'active' : ''}`}
           >
-            <span className="difficulty-label">{level.label}</span>
+            <span className="difficulty-label">
+              {t.difficulties[level.label.toLowerCase() as 'easy' | 'medium' | 'hard']}
+            </span>
             <span className="difficulty-grid">{level.grid}</span>
           </button>
         ))}

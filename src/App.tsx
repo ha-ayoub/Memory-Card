@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import type { Card, GameScore, Theme } from "./utils/types";
-import { DIFFICULTY_LEVELS, THEMES } from "./utils/constants";
+import { THEMES } from "./utils/constants";
 import { makeDeck } from "./utils/helpers";
+import { type Language, translations } from './locales';
 import GameInfo from "./components/GameInfo";
 import VictoryModal from "./components/VictoryModal";
 import GameBoard from "./components/GameBoard";
@@ -20,6 +21,8 @@ export default function App() {
   const [disabled, setDisabled] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [bestScore, setBestScore] = useState<GameScore | null>(null);
+  const [language, setLanguage] = useState<Language>('fr');
+  const t = translations[language];
 
   const matchedCount = useMemo(() => deck.filter(c => c.matched).length, [deck]);
   const totalPairs = (size * size) / 2;
@@ -37,8 +40,8 @@ export default function App() {
       setRunning(false);
       setTimeout(() => setShowModal(true), 500);
       const result: GameScore = { time, moves, size, date: new Date().toISOString() };
-      const isBetter = !bestScore || result.time < bestScore.time || 
-                      (result.time === bestScore.time && result.moves < bestScore.moves);
+      const isBetter = !bestScore || result.time < bestScore.time ||
+        (result.time === bestScore.time && result.moves < bestScore.moves);
       if (isBetter) {
         setBestScore(result);
       }
@@ -88,10 +91,15 @@ export default function App() {
     }
   }
 
+  function handleLanguageChange(lang: Language) {
+    setLanguage(lang);
+    localStorage.setItem('memory-game-language', lang);
+  }
+
   return (
     <div className="app">
       <div className="game-container">
-        <GameInfo 
+        <GameInfo
           currentTheme={currentTheme}
           currentSize={size}
           time={time}
@@ -99,26 +107,31 @@ export default function App() {
           matchedCount={matchedCount}
           totalPairs={totalPairs}
           bestScore={bestScore}
+          language={language}
+          t={t}
           onThemeChange={handleThemeChange}
           onDifficultyChange={startNewGame}
+          onLanguageChange={handleLanguageChange}
         />
 
-        <GameBoard 
-          currentTheme={currentTheme} 
-          deck={deck} size={size} 
-          flipped={flipped} 
-          onCardClick={handleCardClick} 
-          />
+        <GameBoard
+          currentTheme={currentTheme}
+          deck={deck} size={size}
+          flipped={flipped}
+          t={t}
+          onCardClick={handleCardClick}
+        />
       </div>
-      
-      <VictoryModal 
-        isOpen={showModal} 
-        time={time} 
-        moves={moves} 
-        onClose={() => setShowModal(false)} 
-        onReplay={() => startNewGame(size)}/>
 
-        <Signature/>
+      <VictoryModal
+        isOpen={showModal}
+        time={time}
+        moves={moves}
+        t={t}
+        onClose={() => setShowModal(false)}
+        onReplay={() => startNewGame(size)} />
+
+      <Signature />
     </div>
   );
 }

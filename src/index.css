@@ -45,6 +45,7 @@ body {
 }
 
 .logo-section {
+  /* position: relative; */
   text-align: center;
   margin-bottom: 40px;
   padding-bottom: 30px;
@@ -544,6 +545,48 @@ body {
 .modal-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 35px rgba(99, 102, 241, 0.5);
+}
+
+.language-selector-compact {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 10;
+}
+
+.language-dropdown-compact {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 6px 10px;
+  color: #e2e8f0;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  min-width: 30px;
+  text-align: center;
+}
+
+.language-dropdown-compact:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(99, 102, 241, 0.5);
+  transform: scale(1.05);
+}
+
+.language-dropdown-compact:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.language-dropdown-compact option {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 10px;
+  font-size: 0.95em;
 }
 
 @media (max-width: 1200px) {
